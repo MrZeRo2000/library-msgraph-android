@@ -1,0 +1,3 @@
+rootProject.name = "library-msgraph-android"
+include ':app'
+include ':library'
