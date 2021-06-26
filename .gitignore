@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+msgraph_auth_config_single_account.json

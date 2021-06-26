@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.romanpulov.library.msgraph.R;
-import com.romanpulov.library.msgraph.databinding.FragmentSecondBinding;
+import com.romanpulov.library.msgraph.testapp.R;
+import com.romanpulov.library.msgraph.testapp.databinding.FragmentSecondBinding;
 
 public class SecondFragment extends Fragment {
 

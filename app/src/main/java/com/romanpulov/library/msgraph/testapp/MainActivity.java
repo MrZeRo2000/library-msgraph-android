@@ -13,8 +13,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.romanpulov.library.msgraph.R;
-import com.romanpulov.library.msgraph.databinding.ActivityMainBinding;
+import com.romanpulov.library.msgraph.testapp.R;
+import com.romanpulov.library.msgraph.testapp.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
