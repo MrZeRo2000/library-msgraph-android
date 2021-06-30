@@ -19,6 +19,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.microsoft.identity.client.BrowserTabActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!--
+                    Add in your scheme/host from registered redirect URI
+                    note that the leading "/" is required for android:path
+                -->
+                <data
+                    android:host="com.romanpulov.library.msgraph.testapp.v1"
+                    android:path="/G6uKZudXR0jqsLSfaImcy7mi0+Q="
+                    android:scheme="msauth" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

@@ -5,11 +5,6 @@ import com.microsoft.identity.client.ISingleAccountPublicClientApplication;
 
 public abstract class MSGraphBaseHelper {
 
-    protected abstract int getConfigId();
+    protected abstract void configure();
 
-    /* Azure AD Variables */
-    private ISingleAccountPublicClientApplication mSingleAccountApp;
-    private IAccount mAccount;
-
-    
 }
