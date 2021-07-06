@@ -65,6 +65,23 @@ public class FirstFragment extends Fragment {
                 });
             }
         });
+
+        binding.logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MSGraphHelper.getInstance().logout(getContext(), new OnMSActionListener<Void>() {
+                    @Override
+                    public void onActionSuccess(int action, Void data) {
+                        displaySuccess("Successfully signed out");
+                    }
+
+                    @Override
+                    public void onActionFailure(int action, String errorMessage) {
+                        displayFailure("Sign out error:" + errorMessage);
+                    }
+                });
+            }
+        });
     }
 
     @Override
