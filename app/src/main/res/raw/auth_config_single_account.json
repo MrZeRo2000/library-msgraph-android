@@ -1,7 +1,7 @@
 {
   "client_id" : "22b455b1-000a-4bff-a408-d807928be1d6",
   "authorization_user_agent" : "DEFAULT",
-  "redirect_uri" : "msauth://com.romanpulov.library.msgraph.testapp.v1/G6uKZudXR0jqsLSfaImcy7mi0+Q=",
+  "redirect_uri" : "msauth://com.romanpulov.library.msgraph.testapp.v1/G6uKZudXR0jqsLSfaImcy7mi0%2BQ%3D",
   "account_mode" : "SINGLE",
   "broker_redirect_uri_registered": true,
   "authorities" : [

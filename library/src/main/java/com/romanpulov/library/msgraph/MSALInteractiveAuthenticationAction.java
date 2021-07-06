@@ -12,15 +12,14 @@ import com.microsoft.identity.client.exception.MsalClientException;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalServiceException;
 
-public class MSALInteractiveAuthenticationAction extends MSAbstractAccountAppRequiresAction<IAuthenticationResult> {
+public class MSALInteractiveAuthenticationAction extends MSAbstractAccountAppRequiresAction<String> {
     private static final String TAG = MSALInteractiveAuthenticationAction.class.getSimpleName();
 
     private final Activity mActivity;
 
     public MSALInteractiveAuthenticationAction(
             Activity activity,
-            ISingleAccountPublicClientApplication singleAccountApp,
-            OnMSActionListener<IAuthenticationResult> msActionListener
+            OnMSActionListener<String> msActionListener
     ) {
         super(activity.getApplicationContext(), OnMSActionListener.MSAL_ACTION_INTERACTIVE_AUTHENTICATION, msActionListener);
         this.mActivity = activity;
@@ -34,7 +33,7 @@ public class MSALInteractiveAuthenticationAction extends MSAbstractAccountAppReq
                 Log.d(TAG, "Successfully authenticated");
                 MSALData.mAccount.set(authenticationResult.getAccount());
                 if (mMSActionListener != null) {
-                    mMSActionListener.onActionSuccess(mAction, authenticationResult);
+                    mMSActionListener.onActionSuccess(mAction, authenticationResult.getAccessToken());
                 }
             }
 
