@@ -33,6 +33,15 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
+    <Button
+        android:id="@+id/list_items_sync_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List items (Sync)"
+        app:layout_constraintTop_toBottomOf="@+id/logout_button"
+        app:layout_constraintStart_toEndOf="@+id/list_items_button"
+        />
+
     <EditText
         android:id="@+id/text_result"
         android:layout_width="match_parent"

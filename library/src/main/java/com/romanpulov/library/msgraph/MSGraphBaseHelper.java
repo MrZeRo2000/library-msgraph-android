@@ -22,4 +22,8 @@ public abstract class MSGraphBaseHelper {
     public void listItems(Context context, OnMSActionListener<JSONObject> callback) {
         (new MSALListItemsAction(context, "path", callback)).execute();
     }
+
+    public JSONObject listItemsSync(Context context) throws MSActionException {
+        return MSActionExecutor.executeSync(new MSALListItemsAction(context, "path", null));
+    }
 }

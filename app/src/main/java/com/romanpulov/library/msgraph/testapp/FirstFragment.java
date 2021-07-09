@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.romanpulov.library.msgraph.MSActionException;
 import com.romanpulov.library.msgraph.OnMSActionListener;
 import com.romanpulov.library.msgraph.testapp.databinding.FragmentFirstBinding;
 
@@ -106,6 +106,21 @@ public class FirstFragment extends Fragment {
                             }
                         }
                 );
+            }
+        });
+
+
+
+        binding.listItemsSyncButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    JSONObject result = MSGraphHelper.getInstance().listItemsSync(getContext());
+                    displaySuccess("Successfully obtained data: " + (result == null? "null" : result.toString()));
+                } catch (MSActionException e) {
+                    e.printStackTrace();
+                    displayFailure(e.getMessage());
+                }
             }
         });
     }

@@ -2,7 +2,16 @@ package com.romanpulov.library.msgraph;
 
 public abstract class MSAbstractAction<T> {
     protected final int mAction;
-    protected final OnMSActionListener<T> mMSActionListener;
+
+    protected OnMSActionListener<T> mMSActionListener;
+
+    public OnMSActionListener<T> getMSActionListener() {
+        return mMSActionListener;
+    }
+
+    public void setMSActionListener(OnMSActionListener<T> mMSActionListener) {
+        this.mMSActionListener = mMSActionListener;
+    }
 
     public MSAbstractAction(int mAction, OnMSActionListener<T> msActionListener) {
         this.mAction = mAction;
