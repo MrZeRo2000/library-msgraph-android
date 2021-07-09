@@ -26,8 +26,15 @@ public abstract class MSAbstractAccountRequiresAction<T> extends MSAbstractAccou
                     new OnMSActionListener<IAccount>() {
                         @Override
                         public void onActionSuccess(int action, IAccount data) {
-                            Log.d(TAG, "Account obtained successfully, executing action");
-                            executeWithAccount(data);
+                            if (data == null) {
+                                Log.d(TAG, "Account load failure, authentication required");
+                                if (mMSActionListener != null) {
+                                    mMSActionListener.onActionFailure(mAction, "Authentication required");
+                                }
+                            } else {
+                                Log.d(TAG, "Account obtained successfully, executing action");
+                                executeWithAccount(data);
+                            }
                         }
 
                         @Override

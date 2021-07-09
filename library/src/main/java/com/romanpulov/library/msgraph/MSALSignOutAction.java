@@ -21,6 +21,7 @@ public class MSALSignOutAction extends MSAbstractAccountAppRequiresAction<Void>{
             @Override
             public void onSignOut() {
                 Log.d(TAG, "Successfully signed out");
+                MSALData.mAuthenticationResult.set(null);
                 MSALData.mAccount.set(null);
                 if (mMSActionListener != null) {
                     mMSActionListener.onActionSuccess(mAction, null);

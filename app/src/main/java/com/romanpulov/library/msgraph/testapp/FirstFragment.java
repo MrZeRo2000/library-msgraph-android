@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.romanpulov.library.msgraph.OnMSActionListener;
-import com.romanpulov.library.msgraph.testapp.R;
 import com.romanpulov.library.msgraph.testapp.databinding.FragmentFirstBinding;
+
+
+import org.json.JSONObject;
 
 public class FirstFragment extends Fragment {
 
@@ -30,11 +32,15 @@ public class FirstFragment extends Fragment {
     }
 
     private void displaySuccess(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        binding.textResult.setTextColor(getResources().getColor(android.R.color.black));
+        binding.textResult.setText(message);
     }
 
     private void displayFailure(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+        binding.textResult.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        binding.textResult.setText(message);
     }
 
 
@@ -80,6 +86,26 @@ public class FirstFragment extends Fragment {
                         displayFailure("Sign out error:" + errorMessage);
                     }
                 });
+            }
+        });
+
+        binding.listItemsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MSGraphHelper.getInstance().listItems(
+                        getContext(),
+                        new OnMSActionListener<JSONObject>() {
+                            @Override
+                            public void onActionSuccess(int action, JSONObject data) {
+                                displaySuccess("Successfully obtained data: " + data.toString());
+                            }
+
+                            @Override
+                            public void onActionFailure(int action, String errorMessage) {
+                                displayFailure("Error obtaining data: " + errorMessage);
+                            }
+                        }
+                );
             }
         });
     }
