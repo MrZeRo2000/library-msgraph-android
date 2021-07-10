@@ -26,7 +26,7 @@ public class MSALListItemsAction extends MSAbstractAuthenticationRequiredAction<
         Log.d(TAG, "Executing Graph request");
         MSGraphRequestWrapper.callGraphAPIUsingVolley(
                 mContext,
-                "https://graph.microsoft.com/v1.0/me/drive/root/children",
+                "https://graph.microsoft.com/v1.0/me/drive/" + mPath + "/children",
                 authenticationResult.getAccessToken(),
                 new Response.Listener<JSONObject>() {
                     @Override

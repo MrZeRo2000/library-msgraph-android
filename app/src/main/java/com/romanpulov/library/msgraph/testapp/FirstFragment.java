@@ -94,6 +94,7 @@ public class FirstFragment extends Fragment {
             public void onClick(View v) {
                 MSGraphHelper.getInstance().listItems(
                         getContext(),
+                        "root",
                         new OnMSActionListener<JSONObject>() {
                             @Override
                             public void onActionSuccess(int action, JSONObject data) {
@@ -109,6 +110,26 @@ public class FirstFragment extends Fragment {
             }
         });
 
+        binding.listItemsFolderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MSGraphHelper.getInstance().listItems(
+                        getContext(),
+                        "root:/Empty:",
+                        new OnMSActionListener<JSONObject>() {
+                            @Override
+                            public void onActionSuccess(int action, JSONObject data) {
+                                displaySuccess("Successfully obtained data: " + data.toString());
+                            }
+
+                            @Override
+                            public void onActionFailure(int action, String errorMessage) {
+                                displayFailure("Error obtaining data: " + errorMessage);
+                            }
+                        }
+                );
+            }
+        });
 
 
         binding.listItemsSyncButton.setOnClickListener(new View.OnClickListener() {

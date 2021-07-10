@@ -20,8 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
-        app:layout_constraintTop_toBottomOf="@+id/login_button"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/login_button"
+        app:layout_constraintStart_toEndOf="@+id/login_button"
         />
 
     <Button
@@ -34,12 +34,22 @@
         />
 
     <Button
+        android:id="@+id/list_items_folder_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="List items folder"
+        app:layout_constraintTop_toBottomOf="@+id/logout_button"
+        app:layout_constraintStart_toEndOf="@+id/list_items_button"
+        />
+
+
+    <Button
         android:id="@+id/list_items_sync_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List items (Sync)"
         app:layout_constraintTop_toBottomOf="@+id/logout_button"
-        app:layout_constraintStart_toEndOf="@+id/list_items_button"
+        app:layout_constraintStart_toEndOf="@+id/list_items_folder_button"
         />
 
     <EditText

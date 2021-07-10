@@ -19,8 +19,8 @@ public abstract class MSGraphBaseHelper {
         (new MSALSignOutAction(context, callback)).execute();
     }
 
-    public void listItems(Context context, OnMSActionListener<JSONObject> callback) {
-        (new MSALListItemsAction(context, "path", callback)).execute();
+    public void listItems(Context context, String path, OnMSActionListener<JSONObject> callback) {
+        (new MSALListItemsAction(context, path, callback)).execute();
     }
 
     public JSONObject listItemsSync(Context context) throws MSActionException {
