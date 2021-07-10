@@ -1,6 +1,7 @@
 package com.romanpulov.library.msgraph.testapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,13 @@ import com.romanpulov.library.msgraph.testapp.databinding.FragmentFirstBinding;
 
 
 import org.json.JSONObject;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class FirstFragment extends Fragment {
 
@@ -94,7 +102,7 @@ public class FirstFragment extends Fragment {
             public void onClick(View v) {
                 MSGraphHelper.getInstance().listItems(
                         getContext(),
-                        "root",
+                        "/",
                         new OnMSActionListener<JSONObject>() {
                             @Override
                             public void onActionSuccess(int action, JSONObject data) {
@@ -115,7 +123,7 @@ public class FirstFragment extends Fragment {
             public void onClick(View v) {
                 MSGraphHelper.getInstance().listItems(
                         getContext(),
-                        "root:/Empty:",
+                        "/Empty",
                         new OnMSActionListener<JSONObject>() {
                             @Override
                             public void onActionSuccess(int action, JSONObject data) {
@@ -131,17 +139,41 @@ public class FirstFragment extends Fragment {
             }
         });
 
-
-        binding.listItemsSyncButton.setOnClickListener(new View.OnClickListener() {
+        binding.downloadFileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    JSONObject result = MSGraphHelper.getInstance().listItemsSync(getContext());
-                    displaySuccess("Successfully obtained data: " + (result == null? "null" : result.toString()));
-                } catch (MSActionException e) {
-                    e.printStackTrace();
-                    displayFailure(e.getMessage());
-                }
+                MSGraphHelper.getInstance().getBytesByPath(
+                        getContext(),
+                        "/Getting started with OneDrive.pdf",
+                        new OnMSActionListener<byte[]>() {
+                            @Override
+                            public void onActionSuccess(int action, byte[] data) {
+                                File file = new File(getContext().getCacheDir(), "test stream.pdf");
+                                displaySuccess("Successfully obtained stream, writing to file " + file.getAbsolutePath());
+
+                                try (
+                                        InputStream in = new ByteArrayInputStream(data);
+                                        OutputStream out = new FileOutputStream(file);
+                                        )
+                                {
+                                    // Transfer bytes from in to out
+                                    byte[] buf = new byte[1024];
+                                    int len;
+                                    while ((len = in.read(buf)) > 0) {
+                                        out.write(buf, 0, len);
+                                    }
+
+                                } catch (IOException e) {
+                                    displayFailure("Error writing output stream: " + e.getMessage());
+                                }
+                            }
+
+                            @Override
+                            public void onActionFailure(int action, String errorMessage) {
+                                displayFailure("Error obtaining data: " + errorMessage);
+                            }
+                        }
+                );
             }
         });
     }

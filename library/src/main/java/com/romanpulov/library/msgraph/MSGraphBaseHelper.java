@@ -3,9 +3,9 @@ package com.romanpulov.library.msgraph;
 import android.app.Activity;
 import android.content.Context;
 
-import com.microsoft.identity.client.IAuthenticationResult;
-
 import org.json.JSONObject;
+
+import java.io.InputStream;
 
 public abstract class MSGraphBaseHelper {
 
@@ -21,6 +21,10 @@ public abstract class MSGraphBaseHelper {
 
     public void listItems(Context context, String path, OnMSActionListener<JSONObject> callback) {
         (new MSALListItemsAction(context, path, callback)).execute();
+    }
+
+    public void getBytesByPath(Context context, String path, OnMSActionListener<byte[]> callback) {
+        (new MSALGetBytesByPathAction(context, path, callback)).execute();
     }
 
     public JSONObject listItemsSync(Context context) throws MSActionException {

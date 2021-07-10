@@ -9,31 +9,30 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.microsoft.identity.client.IAuthenticationResult;
 
-import org.json.JSONObject;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
-public class MSALListItemsAction extends MSAbstractAuthenticationRequiredAction<JSONObject> {
-    private static final String TAG = MSALListItemsAction.class.getSimpleName();
+public class MSALGetBytesByPathAction extends MSAbstractAuthenticationRequiredAction<byte[]> {
+    private static final String TAG = MSALGetBytesByPathAction.class.getSimpleName();
 
     private final String mPath;
 
-    public MSALListItemsAction(Context context, String path, OnMSActionListener<JSONObject> msActionListener) {
-        super(context, OnMSActionListener.MSAL_ACTION_LIST_ITEMS, msActionListener);
-        this.mPath = path;
+    public MSALGetBytesByPathAction(Context context, String path, OnMSActionListener<byte[]> msActionListener) {
+        super(context, OnMSActionListener.MSAL_ACTION_GET_INPUT_STREAM_BY_PATH, msActionListener);
+        mPath = path;
     }
 
     @Override
     protected void executeWithAuthenticationResult(@NonNull IAuthenticationResult authenticationResult) {
         Log.d(TAG, "Executing Graph request");
 
-        String path = mPath.equals("/") ? "" : ":" + mPath + ":";
-
-        MSGraphRequestWrapper.callGraphAPIUsingVolley(
+        MSGraphRequestWrapper.callGraphAPIByteUsingVolley(
                 mContext,
-                "https://graph.microsoft.com/v1.0/me/drive/root" + path + "/children",
+                "https://graph.microsoft.com/v1.0/me/drive/root:" + mPath + ":/content",
                 authenticationResult.getAccessToken(),
-                new Response.Listener<JSONObject>() {
+                new Response.Listener<byte[]>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(byte[] response) {
                         Log.d(TAG, "Got response from Graph");
                         if (mMSActionListener != null) {
                             mMSActionListener.onActionSuccess(mAction, response);
