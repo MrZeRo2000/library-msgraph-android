@@ -27,6 +27,11 @@ public abstract class MSGraphBaseHelper {
         (new MSALGetBytesByPathAction(context, path, callback)).execute();
     }
 
+    public void putBytesByPath(Context context, String path, byte[] data, OnMSActionListener<String> callback) {
+        (new MSALPutBytesByPathAction(context, path, data, callback)).execute();
+    }
+
+
     public JSONObject listItemsSync(Context context) throws MSActionException {
         return MSActionExecutor.executeSync(new MSALListItemsAction(context, "path", null));
     }

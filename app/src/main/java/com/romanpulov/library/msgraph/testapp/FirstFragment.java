@@ -18,7 +18,9 @@ import com.romanpulov.library.msgraph.testapp.databinding.FragmentFirstBinding;
 import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -174,6 +176,48 @@ public class FirstFragment extends Fragment {
                             }
                         }
                 );
+            }
+        });
+
+        binding.uploadFileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File file = new File(getContext().getCacheDir(), "test stream.pdf");
+
+                try (
+                        InputStream in = new FileInputStream(file);
+                        ByteArrayOutputStream out = new ByteArrayOutputStream();
+                        ) {
+                    // Transfer bytes from in to out
+                    byte[] buf = new byte[1024];
+                    int len;
+                    while ((len = in.read(buf)) > 0) {
+                        out.write(buf, 0, len);
+                    }
+
+                    byte[] bytes = out.toByteArray();
+
+                    MSGraphHelper.getInstance().putBytesByPath(
+                            getContext(),
+                            "/test_put.pdf",
+                            bytes,
+                            new OnMSActionListener<String>() {
+                                @Override
+                                public void onActionSuccess(int action, String data) {
+                                    displaySuccess("Successfully uploaded data: " + data);
+                                }
+
+                                @Override
+                                public void onActionFailure(int action, String errorMessage) {
+                                    displayFailure("Writing data: " + errorMessage);
+                                }
+                            }
+                    );
+
+                } catch (IOException e) {
+                    displayFailure("Error writing ByteArrayOutputStream: " + e.getMessage());
+                }
+
             }
         });
     }

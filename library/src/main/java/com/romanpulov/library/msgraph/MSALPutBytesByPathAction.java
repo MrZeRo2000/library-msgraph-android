@@ -9,27 +9,30 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.microsoft.identity.client.IAuthenticationResult;
 
-public class MSALGetBytesByPathAction extends MSAbstractAuthenticationRequiredAction<byte[]> {
-    private static final String TAG = MSALGetBytesByPathAction.class.getSimpleName();
+public class MSALPutBytesByPathAction extends MSAbstractAuthenticationRequiredAction<String>{
+    private static final String TAG = MSALPutBytesByPathAction.class.getSimpleName();
 
     private final String mPath;
+    private final byte[] mData;
 
-    public MSALGetBytesByPathAction(Context context, String path, OnMSActionListener<byte[]> msActionListener) {
-        super(context, OnMSActionListener.MSAL_ACTION_GET_BYTES_BY_PATH, msActionListener);
+    public MSALPutBytesByPathAction(Context context, String path, byte[] data, OnMSActionListener<String> msActionListener) {
+        super(context, OnMSActionListener.MSAL_ACTION_PUT_BYTES_BY_PATH, msActionListener);
         mPath = path;
+        mData = data;
     }
 
     @Override
     protected void executeWithAuthenticationResult(@NonNull IAuthenticationResult authenticationResult) {
         Log.d(TAG, "Executing Graph request");
 
-        MSGraphRequestWrapper.callGraphAPIByteUsingVolley(
+        MSGraphRequestWrapper.callGraphAPIPutUsingVolley(
                 mContext,
                 "https://graph.microsoft.com/v1.0/me/drive/root:" + mPath + ":/content",
                 authenticationResult.getAccessToken(),
-                new Response.Listener<byte[]>() {
+                mData,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(byte[] response) {
+                    public void onResponse(String response) {
                         Log.d(TAG, "Got response from Graph");
                         if (mMSActionListener != null) {
                             mMSActionListener.onActionSuccess(mAction, response);

@@ -19,6 +19,7 @@
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
         android:text="Logout"
         app:layout_constraintTop_toTopOf="@+id/login_button"
         app:layout_constraintStart_toEndOf="@+id/login_button"
@@ -35,6 +36,7 @@
 
     <Button
         android:id="@+id/list_items_folder_button"
+        android:layout_marginStart="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="List items folder"
@@ -50,6 +52,17 @@
         app:layout_constraintTop_toBottomOf="@+id/list_items_button"
         app:layout_constraintStart_toStartOf="parent"
         />
+
+    <Button
+        android:id="@+id/upload_file_button"
+        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload file"
+        app:layout_constraintTop_toBottomOf="@+id/list_items_button"
+        app:layout_constraintStart_toEndOf="@+id/download_file_button"
+        />
+
 
 
     <EditText

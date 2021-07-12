@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
@@ -156,6 +157,44 @@ public class MSGraphRequestWrapper {
         queue.add(request);
     }
 
+    public static void callGraphAPIPutUsingVolley(@NonNull final Context context,
+                                               @NonNull final String graphResourceUrl,
+                                               @NonNull final String accessToken,
+                                               @NonNull final byte[] body,
+                                               @NonNull final Response.Listener<String> responseListener,
+                                               @NonNull final Response.ErrorListener errorListener) {
+        Log.d(TAG, "Starting volley request to graph");
+
+        /* Make sure we have a token to send to graph */
+        if (accessToken.length() == 0) {
+            return;
+        }
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        StringRequest request = new StringRequest(Request.Method.PUT, graphResourceUrl,
+                responseListener, errorListener) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + accessToken);
+                return headers;
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                return body;
+            }
+        };
+
+        Log.d(TAG, "Adding HTTP GET to Queue, Request: " + request.toString());
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(request);
+    }
 
     public void callGraphAPIForResult(
             @NonNull final Context context,
