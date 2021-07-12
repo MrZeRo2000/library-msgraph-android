@@ -209,7 +209,7 @@ public class FirstFragment extends Fragment {
 
                                 @Override
                                 public void onActionFailure(int action, String errorMessage) {
-                                    displayFailure("Writing data: " + errorMessage);
+                                    displayFailure("Error uploading data: " + errorMessage);
                                 }
                             }
                     );
