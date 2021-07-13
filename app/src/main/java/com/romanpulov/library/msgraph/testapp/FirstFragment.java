@@ -1,5 +1,6 @@
 package com.romanpulov.library.msgraph.testapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,7 +70,9 @@ public class FirstFragment extends Fragment {
         binding.buttonPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_HrPickerFragment);
+                //NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_HrPickerFragment);
+                Intent intent = new Intent(getActivity(), HrPickerActivity.class);
+                getActivity().startActivityForResult(intent, 0);
             }
         });
 

@@ -6,7 +6,7 @@
     tools:context=".HrPickerFragment">
 
     <TextView
-        android:id="@+id/chooser_header"
+        android:id="@+id/picker_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Header2Text"
@@ -16,10 +16,10 @@
         android:background="@color/windowBackgroundLight"
         />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chooser_list"
+        android:id="@+id/picker_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/chooser_header"
+        android:layout_below="@+id/picker_header"
         />
 
 </RelativeLayout>

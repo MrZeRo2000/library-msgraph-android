@@ -1,5 +1,9 @@
 package com.romanpulov.library.msgraph.testapp;
 
+import android.content.Context;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HrPickerScreen implements HrPickerNavigationProcessor {
@@ -29,7 +33,7 @@ public class HrPickerScreen implements HrPickerNavigationProcessor {
         return mParentPath;
     }
 
-    private List<HrPickerItem> mItems;
+    private List<HrPickerItem> mItems = new ArrayList<>();
 
     public List<HrPickerItem> getItems() {
         return mItems;
@@ -61,11 +65,15 @@ public class HrPickerScreen implements HrPickerNavigationProcessor {
         this.mPickerScreenUpdateListener = mPickerScreenUpdateListener;
     }
 
-    public void navigate(String path, HrPickerItem item) {
+    public HrPickerScreen(String mCurrentPath) {
+        this.mCurrentPath = mCurrentPath;
+    }
+
+    public void navigate(Context context, String path, HrPickerItem item) {
         if (mNavigator != null) {
             mErrorMessage = null;
             mStatus = HrPickerScreen.PICKER_SCREEN_STATUS_LOADING;
-            mNavigator.onNavigate(path, item, this);
+            mNavigator.onNavigate(context, path, item, this);
 
             if (mPickerScreenUpdateListener != null) {
                 mPickerScreenUpdateListener.onUpdate(this);
@@ -79,7 +87,13 @@ public class HrPickerScreen implements HrPickerNavigationProcessor {
         mErrorMessage = null;
         mCurrentPath = path;
         mParentPath = getParentFromPath(mCurrentPath);
-        mItems = items;
+
+        mItems.clear();
+        if (!mParentPath.isEmpty()) {
+            mItems.add(new HrPickerItem(HrPickerItem.ITEM_TYPE_PARENT, null));
+        }
+        mItems.addAll(items);
+        Collections.sort(mItems, new HrPickerItemComparator());
 
         if (mPickerScreenUpdateListener != null) {
             mPickerScreenUpdateListener.onUpdate(this);
