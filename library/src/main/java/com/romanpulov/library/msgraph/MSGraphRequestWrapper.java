@@ -27,26 +27,6 @@ import java.util.Map;
 public class MSGraphRequestWrapper {
     private static final String TAG = MSGraphRequestWrapper.class.getSimpleName();
 
-    public static class VolleyResult {
-        public final JSONObject response;
-        public final VolleyError error;
-
-        public VolleyResult(JSONObject response, VolleyError error) {
-            this.response = response;
-            this.error = error;
-        }
-    }
-
-    public interface OnVolleyResultListener {
-        void onVolleyRequestCompleted(VolleyResult volleyResult);
-    }
-
-    private OnVolleyResultListener mOnVolleyResultListener;
-
-    public void setOnVolleyResultListener(OnVolleyResultListener mOnVolleyResultListener) {
-        this.mOnVolleyResultListener = mOnVolleyResultListener;
-    }
-
     public static class InputStreamVolleyRequest extends Request<byte[]> {
         private final Response.Listener<byte[]> mListener;
         //create a static map for directly accessing headers
@@ -184,54 +164,6 @@ public class MSGraphRequestWrapper {
             @Override
             public byte[] getBody() throws AuthFailureError {
                 return body;
-            }
-        };
-
-        Log.d(TAG, "Adding HTTP GET to Queue, Request: " + request.toString());
-
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                3000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        queue.add(request);
-    }
-
-    public void callGraphAPIForResult(
-            @NonNull final Context context,
-            @NonNull final String graphResourceUrl,
-            @NonNull final String accessToken
-    ) {
-        Log.d(TAG, "Starting volley request to graph");
-
-        RequestQueue queue = Volley.newRequestQueue(context);
-        JSONObject parameters = new JSONObject();
-
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                graphResourceUrl,
-                parameters,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (mOnVolleyResultListener != null) {
-                            mOnVolleyResultListener.onVolleyRequestCompleted(new VolleyResult(response, null));
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        if (mOnVolleyResultListener != null) {
-                            mOnVolleyResultListener.onVolleyRequestCompleted(new VolleyResult(null, error));
-                        }
-                    }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + accessToken);
-                return headers;
             }
         };
 
