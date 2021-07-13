@@ -37,7 +37,7 @@ public class MSGraphRequestWrapper {
         }
     }
 
-    public static interface OnVolleyResultListener {
+    public interface OnVolleyResultListener {
         void onVolleyRequestCompleted(VolleyResult volleyResult);
     }
 

@@ -1,3 +1,16 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="text_margin_half">8dp</dimen>
+    <dimen name="search_button_size">36sp</dimen>
+    <dimen name="priority_image_size">32dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- Highlight circle dimensions -->
+    <dimen name="highlight_circle_size">26dp</dimen>
+    <dimen name="highlight_circle_border">1dp</dimen>
+
 </resources>

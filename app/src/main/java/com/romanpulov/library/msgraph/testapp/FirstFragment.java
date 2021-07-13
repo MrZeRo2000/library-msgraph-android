@@ -65,6 +65,13 @@ public class FirstFragment extends Fragment {
             }
         });
 
+        binding.buttonPicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_HrPickerFragment);
+            }
+        });
+
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -199,7 +206,7 @@ public class FirstFragment extends Fragment {
 
                     MSGraphHelper.getInstance().putBytesByPath(
                             getContext(),
-                            "/test_put.pdf",
+                            "/New/test_put.pdf",
                             bytes,
                             new OnMSActionListener<String>() {
                                 @Override

@@ -1,4 +1,4 @@
-package com.romanpulov.library;
+package com.romanpulov.library.msgraph;
 
 import org.junit.Test;
 

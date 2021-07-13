@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HrPickerFragment">
+
+    <TextView
+        android:id="@+id/chooser_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Header2Text"
+        android:layout_marginTop="@dimen/text_margin_half"
+        android:layout_marginBottom="@dimen/text_margin_half"
+        android:padding="@dimen/text_margin_half"
+        android:background="@color/windowBackgroundLight"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chooser_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/chooser_header"
+        />
+
+</RelativeLayout>
