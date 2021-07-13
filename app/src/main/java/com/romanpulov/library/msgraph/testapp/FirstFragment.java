@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 public class FirstFragment extends Fragment {
 
@@ -225,6 +226,47 @@ public class FirstFragment extends Fragment {
                     displayFailure("Error writing ByteArrayOutputStream: " + e.getMessage());
                 }
 
+            }
+        });
+
+        binding.uploadFileListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // prepare files
+                final int fileCount = 10;
+                File[] files = new File[fileCount];
+
+                for (int i = 0; i < fileCount; i++) {
+                    File f = new File(getContext().getCacheDir(), "f" + i + ".txt");
+                    try (
+                            FileOutputStream outputStream = new FileOutputStream(f);
+                            PrintWriter printWriter = new PrintWriter(outputStream);
+                            ) {
+
+                        printWriter.write("Data:" + i);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    files[i] = f;
+                }
+
+                MSGraphHelper.getInstance().putFiles(
+                        getContext(),
+                        "/FilesToTest",
+                        files,
+                        new OnMSActionListener<Void>() {
+                            @Override
+                            public void onActionSuccess(int action, Void data) {
+                                displaySuccess("Successfully written files");
+                            }
+
+                            @Override
+                            public void onActionFailure(int action, String errorMessage) {
+                                displayFailure("Error writing files: " + errorMessage);
+                            }
+                        }
+                );
             }
         });
     }

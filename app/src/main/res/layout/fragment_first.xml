@@ -63,7 +63,15 @@
         app:layout_constraintStart_toEndOf="@+id/download_file_button"
         />
 
-
+    <Button
+        android:id="@+id/upload_file_list_button"
+        android:layout_marginStart="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload files"
+        app:layout_constraintTop_toBottomOf="@+id/list_items_button"
+        app:layout_constraintStart_toEndOf="@+id/upload_file_button"
+        />
 
     <EditText
         android:id="@+id/text_result"
