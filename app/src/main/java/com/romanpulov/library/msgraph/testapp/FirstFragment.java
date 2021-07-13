@@ -1,13 +1,19 @@
 package com.romanpulov.library.msgraph.testapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -34,7 +40,7 @@ public class FirstFragment extends Fragment {
 
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
+            @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
@@ -45,13 +51,13 @@ public class FirstFragment extends Fragment {
 
     private void displaySuccess(String message) {
         //Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-        binding.textResult.setTextColor(getResources().getColor(android.R.color.black));
+        binding.textResult.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
         binding.textResult.setText(message);
     }
 
     private void displayFailure(String message) {
         //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
-        binding.textResult.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+        binding.textResult.setTextColor(ContextCompat.getColor(getContext(), android.R.color.holo_red_dark));
         binding.textResult.setText(message);
     }
 
@@ -71,8 +77,19 @@ public class FirstFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //NavHostFragment.findNavController(FirstFragment.this).navigate(R.id.action_FirstFragment_to_HrPickerFragment);
-                Intent intent = new Intent(getActivity(), HrPickerActivity.class);
-                getActivity().startActivityForResult(intent, 0);
+                //Intent intent = new Intent(getActivity(), HrPickerActivity.class);
+                //getActivity().startActivityForResult(intent, 0);
+
+                ActivityResultLauncher<Intent> pickerResult = registerForActivityResult(
+                        new ActivityResultContracts.StartActivityForResult(),
+                        new ActivityResultCallback<ActivityResult>() {
+                            @Override
+                            public void onActivityResult(ActivityResult result) {
+
+                            }
+                        }
+                );
+                pickerResult.launch(new Intent(getActivity(), HrPickerActivity.class));
             }
         });
 
@@ -166,7 +183,7 @@ public class FirstFragment extends Fragment {
 
                                 try (
                                         InputStream in = new ByteArrayInputStream(data);
-                                        OutputStream out = new FileOutputStream(file);
+                                        OutputStream out = new FileOutputStream(file)
                                         )
                                 {
                                     // Transfer bytes from in to out
@@ -197,7 +214,7 @@ public class FirstFragment extends Fragment {
 
                 try (
                         InputStream in = new FileInputStream(file);
-                        ByteArrayOutputStream out = new ByteArrayOutputStream();
+                        ByteArrayOutputStream out = new ByteArrayOutputStream()
                         ) {
                     // Transfer bytes from in to out
                     byte[] buf = new byte[1024];
@@ -243,7 +260,7 @@ public class FirstFragment extends Fragment {
                     File f = new File(getContext().getCacheDir(), "f" + i + ".txt");
                     try (
                             FileOutputStream outputStream = new FileOutputStream(f);
-                            PrintWriter printWriter = new PrintWriter(outputStream);
+                            PrintWriter printWriter = new PrintWriter(outputStream)
                             ) {
 
                         printWriter.write("Data:" + i);

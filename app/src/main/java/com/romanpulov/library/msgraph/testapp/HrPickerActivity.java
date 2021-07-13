@@ -1,8 +1,10 @@
 package com.romanpulov.library.msgraph.testapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.os.Bundle;
 
@@ -14,6 +16,16 @@ public class HrPickerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         FragmentManager fm = getSupportFragmentManager();
+
+        fm.setFragmentResultListener(
+                HrPickerFragment.RESULT_KEY,
+                this,
+                new FragmentResultListener() {
+                    @Override
+                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                        String result = bundle.getString(HrPickerFragment.RESULT_KEY);
+                    }
+                });
 
         Fragment fragment = fm.findFragmentById(android.R.id.content);
         if (fragment == null) {
@@ -30,6 +42,5 @@ public class HrPickerActivity extends AppCompatActivity {
                 fm.beginTransaction().add(android.R.id.content, hrPickerFragment).commit();
             }
         }
-
     }
 }

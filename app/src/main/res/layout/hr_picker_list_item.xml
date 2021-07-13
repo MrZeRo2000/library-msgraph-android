@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hr_picker_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/list_selector"
+    >
+
+    <TextView
+        android:id="@+id/hr_picker_text"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/text_margin_half"
+        android:gravity="start|center"
+        android:textAppearance="@style/Text3"
+        />
+</LinearLayout>
