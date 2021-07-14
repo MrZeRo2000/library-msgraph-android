@@ -8,10 +8,10 @@ import androidx.annotation.NonNull;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.IAuthenticationResult;
 
-public abstract class MSAbstractAuthenticationRequiredAction<T> extends MSAbstractAccountRequiresAction<T> {
-    private static final String TAG = MSAbstractAuthenticationRequiredAction.class.getSimpleName();
+public abstract class MSAbstractAuthenticationRequiresAction<T> extends MSAbstractAccountRequiresAction<T> {
+    private static final String TAG = MSAbstractAuthenticationRequiresAction.class.getSimpleName();
 
-    public MSAbstractAuthenticationRequiredAction(Context context, int action, OnMSActionListener<T> msActionListener) {
+    public MSAbstractAuthenticationRequiresAction(Context context, int action, OnMSActionListener<T> msActionListener) {
         super(context, action, msActionListener);
     }
 

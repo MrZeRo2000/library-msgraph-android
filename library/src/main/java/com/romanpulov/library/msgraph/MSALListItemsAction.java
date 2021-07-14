@@ -11,7 +11,7 @@ import com.microsoft.identity.client.IAuthenticationResult;
 
 import org.json.JSONObject;
 
-public class MSALListItemsAction extends MSAbstractAuthenticationRequiredAction<JSONObject> {
+public class MSALListItemsAction extends MSAbstractAuthenticationRequiresAction<JSONObject> {
     private static final String TAG = MSALListItemsAction.class.getSimpleName();
 
     private final String mPath;

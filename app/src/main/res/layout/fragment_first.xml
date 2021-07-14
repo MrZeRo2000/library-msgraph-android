@@ -26,6 +26,16 @@
         />
 
     <Button
+        android:id="@+id/load_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Load"
+        app:layout_constraintTop_toTopOf="@+id/logout_button"
+        app:layout_constraintStart_toEndOf="@+id/logout_button"
+        />
+
+    <Button
         android:id="@+id/list_items_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

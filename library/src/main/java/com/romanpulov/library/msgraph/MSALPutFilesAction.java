@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class MSALPutFilesAction extends MSAbstractAuthenticationRequiredAction<Void> {
+public class MSALPutFilesAction extends MSAbstractAuthenticationRequiresAction<Void> {
     private static final String TAG = MSALPutFilesAction.class.getSimpleName();
 
     private final String mPath;

@@ -9,7 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.microsoft.identity.client.IAuthenticationResult;
 
-public class MSALPutBytesByPathAction extends MSAbstractAuthenticationRequiredAction<String>{
+public class MSALPutBytesByPathAction extends MSAbstractAuthenticationRequiresAction<String> {
     private static final String TAG = MSALPutBytesByPathAction.class.getSimpleName();
 
     private final String mPath;

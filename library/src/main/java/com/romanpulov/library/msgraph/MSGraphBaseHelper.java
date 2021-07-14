@@ -20,6 +20,10 @@ public abstract class MSGraphBaseHelper {
         MSActionExecutor.execute((new MSALSignOutAction(context, callback)));
     }
 
+    public void load(Context context, OnMSActionListener<Void> callback) {
+        MSActionExecutor.execute((new MSALLoadAccountAction(context, callback)));
+    }
+
     public void listItems(Context context, String path, OnMSActionListener<JSONObject> callback) {
         MSActionExecutor.execute((new MSALListItemsAction(context, path, callback)));
     }

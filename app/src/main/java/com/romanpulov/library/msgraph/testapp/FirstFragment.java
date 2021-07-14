@@ -136,6 +136,23 @@ public class FirstFragment extends Fragment {
             }
         });
 
+        binding.loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MSGraphHelper.getInstance().load(getContext(), new OnMSActionListener<Void>() {
+                    @Override
+                    public void onActionSuccess(int action, Void data) {
+                        displaySuccess("Successfully loaded account");
+                    }
+
+                    @Override
+                    public void onActionFailure(int action, String errorMessage) {
+                        displayFailure("Load account error:" + errorMessage);
+                    }
+                });
+            }
+        });
+
         binding.listItemsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
