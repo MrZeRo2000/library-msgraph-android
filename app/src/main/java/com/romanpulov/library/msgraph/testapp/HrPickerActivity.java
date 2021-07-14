@@ -7,8 +7,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
 import android.os.Bundle;
+import android.util.Log;
 
 public class HrPickerActivity extends AppCompatActivity {
+    public static final String TAG = HrPickerActivity.class.getSimpleName();
+
     public static final String PICKER_INITIAL_PATH = "ChooserInitialPath";
 
     @Override
@@ -23,7 +26,10 @@ public class HrPickerActivity extends AppCompatActivity {
                 new FragmentResultListener() {
                     @Override
                     public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
-                        String result = bundle.getString(HrPickerFragment.RESULT_KEY);
+                        if (requestKey.equals(HrPickerFragment.RESULT_KEY)) {
+                            String result = bundle.getString(HrPickerFragment.RESULT_VALUE_KEY);
+                            Log.d(TAG, "Obtained result: " + result);
+                        }
                     }
                 });
 

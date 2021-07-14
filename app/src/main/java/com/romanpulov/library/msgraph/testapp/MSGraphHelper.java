@@ -64,20 +64,18 @@ public class MSGraphHelper extends MSGraphBaseHelper implements HrPickerNavigato
     }
 
     @Override
-    synchronized public void onNavigate(Context context, String path, HrPickerItem item, HrPickerNavigationProcessor processor) {
+    synchronized public void onNavigate(Context context, String path, HrPickerNavigationProcessor processor) {
         if (!mNavigating.get()) {
             mNavigating.set(true);
 
-            String navigationPath = path + (item == null ? "" : item.name);
-            Log.d(TAG, "Navigating to path: " + navigationPath);
-
             listItems(
                     context,
-                    navigationPath,
+                    path,
                     new OnMSActionListener<JSONObject>() {
                         @Override
                         public void onActionSuccess(int action, JSONObject data) {
                             Log.d(TAG, "Obtained data:" + data.toString());
+                            mNavigating.set(false);
                             try {
                                 processor.onNavigationSuccess(path, parseJSONObject(data));
                             } catch (JSONException e) {
@@ -88,6 +86,7 @@ public class MSGraphHelper extends MSGraphBaseHelper implements HrPickerNavigato
                         @Override
                         public void onActionFailure(int action, String errorMessage) {
                             Log.d(TAG, "Navigation error, passing error message: " + errorMessage);
+                            mNavigating.set(false);
                             processor.onNavigationFailure(path, errorMessage);
                         }
                     });

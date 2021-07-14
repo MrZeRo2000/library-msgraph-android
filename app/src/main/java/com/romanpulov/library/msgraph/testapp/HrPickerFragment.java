@@ -104,7 +104,7 @@ public class HrPickerFragment extends Fragment implements HrPickerScreen.OnHrPic
                     switch (selectedItem.itemType) {
                         case HrPickerItem.ITEM_TYPE_FILE:
                             Bundle result = new Bundle();
-                            result.putString(RESULT_VALUE_KEY, selectedItem.name);
+                            result.putString(RESULT_VALUE_KEY, HrPickerScreen.combinePath(mPickerScreen.getCurrentPath(), selectedItem));
                             HrPickerFragment.this.getParentFragmentManager().setFragmentResult(RESULT_KEY, result);
                             break;
                         case HrPickerItem.ITEM_TYPE_PARENT:
@@ -134,6 +134,7 @@ public class HrPickerFragment extends Fragment implements HrPickerScreen.OnHrPic
     @Override
     public void onUpdate(HrPickerScreen hrPickerScreen) {
         Log.d(TAG, "onUpdate");
+        mAdapter.notifyDataSetChanged();
         mIsEmpty = false;
     }
 
@@ -155,7 +156,7 @@ public class HrPickerFragment extends Fragment implements HrPickerScreen.OnHrPic
         if (getArguments() != null) {
             mInitialPath = getArguments().getString(INITIAL_PATH);
         }
-        // setRetainInstance(true);
+        setRetainInstance(true);
 
         mAdapter = new HrPickerAdapter(mPickerScreen.getItems());
     }
@@ -170,6 +171,8 @@ public class HrPickerFragment extends Fragment implements HrPickerScreen.OnHrPic
         if (getActivity() != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
+
+        recyclerView.setAdapter(mAdapter);
 
         return v;
     }

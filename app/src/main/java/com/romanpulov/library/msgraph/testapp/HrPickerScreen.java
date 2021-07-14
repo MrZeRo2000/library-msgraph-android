@@ -1,12 +1,15 @@
 package com.romanpulov.library.msgraph.testapp;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class HrPickerScreen implements HrPickerNavigationProcessor {
+    public final static String TAG = HrPickerScreen.class.getSimpleName();
+
     public final static int PICKER_SCREEN_STATUS_READY = 0;
     public final static int PICKER_SCREEN_STATUS_LOADING = 1;
     public final static int PICKER_SCREEN_STATUS_ERROR = 2;
@@ -73,7 +76,7 @@ public class HrPickerScreen implements HrPickerNavigationProcessor {
         if (mNavigator != null) {
             mErrorMessage = null;
             mStatus = HrPickerScreen.PICKER_SCREEN_STATUS_LOADING;
-            mNavigator.onNavigate(context, path, item, this);
+            mNavigator.onNavigate(context, combinePath(path, item), this);
 
             if (mPickerScreenUpdateListener != null) {
                 mPickerScreenUpdateListener.onUpdate(this);
@@ -87,6 +90,8 @@ public class HrPickerScreen implements HrPickerNavigationProcessor {
         mErrorMessage = null;
         mCurrentPath = path;
         mParentPath = getParentFromPath(mCurrentPath);
+
+        Log.d(TAG, "currentPath=" + mCurrentPath + ", parentPath=" + mParentPath);
 
         mItems.clear();
         if (!mParentPath.isEmpty()) {
@@ -112,12 +117,18 @@ public class HrPickerScreen implements HrPickerNavigationProcessor {
 
     public static String getParentFromPath(String path) {
         int iPath = path.lastIndexOf("/");
-        if (iPath < 0) {
+        if ((iPath < 0) || path.equals("/")) {
             return "";
         } else if (iPath == 0) {
             return "/";
         } else {
             return path.substring(0, iPath);
         }
+    }
+
+    public static String combinePath(String path, HrPickerItem item) {
+        return ((item == null) || (item.itemType == HrPickerItem.ITEM_TYPE_PARENT)) ?
+                path :
+                path + (path.endsWith("/") ? "" : "/") + item.name;
     }
 }

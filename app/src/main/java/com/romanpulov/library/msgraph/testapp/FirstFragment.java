@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
@@ -37,6 +38,23 @@ import java.io.PrintWriter;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
+
+    private ActivityResultLauncher<Intent> mPickerResult;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPickerResult = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+
+                    }
+                }
+        );
+
+    }
 
     @Override
     public View onCreateView(
@@ -80,16 +98,7 @@ public class FirstFragment extends Fragment {
                 //Intent intent = new Intent(getActivity(), HrPickerActivity.class);
                 //getActivity().startActivityForResult(intent, 0);
 
-                ActivityResultLauncher<Intent> pickerResult = registerForActivityResult(
-                        new ActivityResultContracts.StartActivityForResult(),
-                        new ActivityResultCallback<ActivityResult>() {
-                            @Override
-                            public void onActivityResult(ActivityResult result) {
-
-                            }
-                        }
-                );
-                pickerResult.launch(new Intent(getActivity(), HrPickerActivity.class));
+                mPickerResult.launch(new Intent(getActivity(), HrPickerActivity.class));
             }
         });
 
