@@ -25,7 +25,7 @@ public class MSGraphHelper extends MSGraphBaseHelper implements HrPickerNavigato
 
     private static MSGraphHelper instance;
 
-    private AtomicBoolean mNavigating = new AtomicBoolean(false);
+    private final AtomicBoolean mNavigating = new AtomicBoolean(false);
 
     public static MSGraphHelper getInstance() {
         if (instance == null) {
