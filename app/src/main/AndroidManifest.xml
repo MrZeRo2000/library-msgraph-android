@@ -32,7 +32,7 @@
                     note that the leading "/" is required for android:path
                 -->
                 <data
-                    android:host="com.romanpulov.library.msgraph.testapp.v1"
+                    android:host="com.romanpulov.library.msgraph.testapp"
                     android:path="/G6uKZudXR0jqsLSfaImcy7mi0+Q="
                     android:scheme="msauth" />
             </intent-filter>
