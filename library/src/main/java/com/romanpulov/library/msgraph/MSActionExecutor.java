@@ -36,12 +36,10 @@ public class MSActionExecutor {
             }
         });
 
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(action::execute);
-
+        action.execute();
 
         try {
-            mLocker.await(10, TimeUnit.SECONDS);
+            mLocker.await();
 
             if (mException.get() != null) {
                 throw mException.get();
