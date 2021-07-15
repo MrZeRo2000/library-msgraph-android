@@ -10,7 +10,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov MSGraph library for Android'
-    libraryVersion = '0.0.2'
+    libraryVersion = '0.0.4'
 }
 
 android {
@@ -18,10 +18,10 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "0.0.2"
+        versionName "0.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -42,7 +42,7 @@ android {
 dependencies {
     implementation 'com.android.volley:volley:1.2.0'
 
-    implementation 'com.microsoft.identity.client:msal:2.0.12'
+    api 'com.microsoft.identity.client:msal:2.0.12'
 
     implementation 'com.romanpulov:jutils-core:0.3.11'
 
