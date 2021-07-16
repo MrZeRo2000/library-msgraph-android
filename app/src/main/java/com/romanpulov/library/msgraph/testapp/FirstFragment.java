@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -49,7 +50,8 @@ public class FirstFragment extends Fragment {
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
-
+                        String pickerResult = result.getData().getStringExtra(HrPickerActivity.PICKER_RESULT);
+                        Toast.makeText(getContext(), "Result from mPickerResult: " + pickerResult, Toast.LENGTH_SHORT).show();
                     }
                 }
         );

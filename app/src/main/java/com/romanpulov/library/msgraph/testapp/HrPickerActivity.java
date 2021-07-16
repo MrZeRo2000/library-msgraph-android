@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -14,6 +15,7 @@ public class HrPickerActivity extends AppCompatActivity {
     public static final String TAG = HrPickerActivity.class.getSimpleName();
 
     public static final String PICKER_INITIAL_PATH = "ChooserInitialPath";
+    public static final String PICKER_RESULT = "PickerResult";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,9 @@ public class HrPickerActivity extends AppCompatActivity {
                             String result = bundle.getString(HrPickerFragment.RESULT_VALUE_KEY);
                             Log.d(TAG, "Obtained result: " + result);
                             Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                            Intent resultIntent = new Intent();
+                            resultIntent.putExtra(PICKER_RESULT, result);
+                            setResult(0, resultIntent);
                             finish();
                         }
                     }

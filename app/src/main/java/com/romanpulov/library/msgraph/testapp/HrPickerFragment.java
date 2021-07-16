@@ -22,7 +22,7 @@ import java.util.List;
  * Use the {@link HrPickerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HrPickerFragment extends Fragment implements HrPickerScreen.OnHrPickerScreenUpdateListener {
+public class    HrPickerFragment extends Fragment implements HrPickerScreen.OnHrPickerScreenUpdateListener {
     private static final String TAG = HrPickerFragment.class.getSimpleName();
 
     public static final String RESULT_KEY = HrPickerFragment.class.getSimpleName() + "_RESULT";
