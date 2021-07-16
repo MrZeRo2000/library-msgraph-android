@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -61,7 +62,13 @@ public class MSGraphRequestWrapper {
     public static final String MS_GRAPH_ROOT_ENDPOINT = "https://graph.microsoft.com/";
 
     public static String getErrorResponseBody(VolleyError error) {
-        return new String(error.networkResponse.data, StandardCharsets.UTF_8);
+        if (error instanceof NoConnectionError) {
+            return "No internet connection";
+        } else if (error.networkResponse != null) {
+            return new String(error.networkResponse.data, StandardCharsets.UTF_8);
+        } else {
+            return "Unknown error";
+        }
     }
 
     /**

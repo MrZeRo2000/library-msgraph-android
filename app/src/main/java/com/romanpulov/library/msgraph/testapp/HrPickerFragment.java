@@ -147,6 +147,7 @@ public class HrPickerFragment extends Fragment implements HrPickerScreen.OnHrPic
         Bundle args = new Bundle();
         args.putString("InitialPath", initialPath);
         fragment.setArguments(args);
+        fragment.setPickerScreen(new HrPickerScreen(initialPath));
         return fragment;
     }
 

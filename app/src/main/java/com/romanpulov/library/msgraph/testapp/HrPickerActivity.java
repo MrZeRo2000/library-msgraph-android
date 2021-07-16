@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentResultListener;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 public class HrPickerActivity extends AppCompatActivity {
     public static final String TAG = HrPickerActivity.class.getSimpleName();
@@ -29,6 +30,8 @@ public class HrPickerActivity extends AppCompatActivity {
                         if (requestKey.equals(HrPickerFragment.RESULT_KEY)) {
                             String result = bundle.getString(HrPickerFragment.RESULT_VALUE_KEY);
                             Log.d(TAG, "Obtained result: " + result);
+                            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
                 });
@@ -39,10 +42,7 @@ public class HrPickerActivity extends AppCompatActivity {
 
             HrPickerFragment hrPickerFragment = HrPickerFragment.newInstance("/");
 
-            HrPickerScreen oneDrivePickerScreen = new HrPickerScreen("/");
-            oneDrivePickerScreen.setNavigator(MSGraphHelper.getInstance());
-
-            hrPickerFragment.setPickerScreen(oneDrivePickerScreen);
+            hrPickerFragment.getPickerScreen().setNavigator(MSGraphHelper.getInstance());
 
             if (hrPickerFragment != null) {
                 fm.beginTransaction().add(android.R.id.content, hrPickerFragment).commit();
