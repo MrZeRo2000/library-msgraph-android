@@ -6,7 +6,6 @@ import android.content.Context;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.InputStream;
 
 public abstract class MSGraphBaseHelper {
 
@@ -32,8 +31,16 @@ public abstract class MSGraphBaseHelper {
         MSActionExecutor.execute((new MSALGetBytesByPathAction(context, path, callback)));
     }
 
+    public byte[] getBytesByPath(Context context, String path) throws MSActionException {
+        return MSActionExecutor.executeSync(new MSALGetBytesByPathAction(context, path, null));
+    }
+
     public void putBytesByPath(Context context, String path, byte[] data, OnMSActionListener<String> callback) {
         MSActionExecutor.execute((new MSALPutBytesByPathAction(context, path, data, callback)));
+    }
+
+    public void putBytesByPath(Context context, String path, byte[] data) throws MSActionException {
+        MSActionExecutor.executeSync((new MSALPutBytesByPathAction(context, path, data, null)));
     }
 
     public void putFiles(Context context, String path, File[] files, OnMSActionListener<Void> callback) {
