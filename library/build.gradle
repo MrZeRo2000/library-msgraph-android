@@ -10,7 +10,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov MSGraph library for Android'
-    libraryVersion = '0.0.8'
+    libraryVersion = '0.0.9'
 }
 
 android {
@@ -44,7 +44,7 @@ dependencies {
 
     api 'com.microsoft.identity.client:msal:2.0.12'
 
-    implementation 'com.romanpulov:jutils-core:0.3.11'
+    implementation 'com.romanpulov:jutils-core:0.3.12'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
