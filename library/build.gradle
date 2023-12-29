@@ -10,7 +10,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov MSGraph library for Android'
-    libraryVersion = '0.0.12'
+    libraryVersion = '0.0.13'
 }
 
 android {
@@ -44,9 +44,14 @@ android {
 dependencies {
     implementation 'com.android.volley:volley:1.2.1'
 
-    api 'com.microsoft.identity.client:msal:2.0.12'
+    // https://github.com/AzureAD/microsoft-authentication-library-for-android/issues/1864
+    api("com.microsoft.identity.client:msal:4.10.0") {
+        exclude(group : "io.opentelemetry")
+    }
+    implementation("io.opentelemetry:opentelemetry-api:1.18.0")
+    implementation("io.opentelemetry:opentelemetry-context:1.18.0")
 
-    implementation 'com.romanpulov:jutils-core:0.4.0'
+    implementation 'com.romanpulov:jutils-core:0.4.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
