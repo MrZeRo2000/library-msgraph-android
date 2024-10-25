@@ -10,16 +10,16 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov MSGraph library for Android'
-    libraryVersion = '0.0.13'
+    libraryVersion = '0.0.14'
 }
 
 android {
     namespace = "com.romanpulov.library.msgraph"
 
     defaultConfig {
-        compileSdk 34
-        minSdkVersion 21
-        targetSdkVersion 34
+        compileSdk 35
+        minSdkVersion 24
+        targetSdkVersion 35
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -42,20 +42,22 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.annotation:annotation:1.9.0'
     implementation 'com.android.volley:volley:1.2.1'
 
     // https://github.com/AzureAD/microsoft-authentication-library-for-android/issues/1864
-    api("com.microsoft.identity.client:msal:4.10.0") {
+    api('com.microsoft.identity.client:msal:5.4.0') {
         exclude(group : "io.opentelemetry")
     }
-    implementation("io.opentelemetry:opentelemetry-api:1.18.0")
-    implementation("io.opentelemetry:opentelemetry-context:1.18.0")
+    implementation('io.opentelemetry:opentelemetry-api:1.40.0')
+    implementation('io.opentelemetry:opentelemetry-context:1.40.0')
 
-    implementation 'com.romanpulov:jutils-core:0.4.1'
+    implementation 'com.romanpulov:jutils-core:0.4.2'
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.annotation:annotation:1.9.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
 
 // Because the components are created only during the afterEvaluate phase, you must
