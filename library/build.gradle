@@ -10,7 +10,7 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov MSGraph library for Android'
-    libraryVersion = '0.0.15'
+    libraryVersion = '0.0.16'
 }
 
 android {
@@ -54,7 +54,7 @@ dependencies {
     implementation('io.opentelemetry:opentelemetry-api:1.40.0')
     implementation('io.opentelemetry:opentelemetry-context:1.40.0')
 
-    implementation 'com.romanpulov:jutils-core:0.4.3'
+    implementation 'com.romanpulov:jutils-core:0.4.4'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.annotation:annotation:1.9.1'
