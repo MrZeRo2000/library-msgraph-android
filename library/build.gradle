@@ -10,28 +10,30 @@ ext {
     artifact = 'library'
 
     libraryDescription = 'Roman Pulov MSGraph library for Android'
-    libraryVersion = '0.0.14'
+    libraryVersion = '0.0.15'
 }
 
 android {
     namespace = "com.romanpulov.library.msgraph"
 
     defaultConfig {
-        compileSdk 35
+        compileSdk 36
         minSdkVersion 24
-        targetSdkVersion 35
+        targetSdkVersion 36
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
     publishing {
         singleVariant('release') {
         }
@@ -42,7 +44,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.9.0'
+    implementation 'androidx.annotation:annotation:1.9.1'
     implementation 'com.android.volley:volley:1.2.1'
 
     // https://github.com/AzureAD/microsoft-authentication-library-for-android/issues/1864
@@ -52,10 +54,10 @@ dependencies {
     implementation('io.opentelemetry:opentelemetry-api:1.40.0')
     implementation('io.opentelemetry:opentelemetry-context:1.40.0')
 
-    implementation 'com.romanpulov:jutils-core:0.4.2'
+    implementation 'com.romanpulov:jutils-core:0.4.3'
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.annotation:annotation:1.9.0'
+    androidTestImplementation 'androidx.annotation:annotation:1.9.1'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
 }
